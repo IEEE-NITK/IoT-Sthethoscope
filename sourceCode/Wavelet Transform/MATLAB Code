@@ -1,0 +1,16 @@
+//Arrhythmia
+data = load('100m.mat');
+a = data.val(2,:);
+t = linspace(0,60,21600);
+plot(t,a/200);
+xlabel('Time (s)');
+ylabel('Amplitude (mV)');
+cwt(a);
+
+
+//COVID
+[y,Fs] = audioread('cough-heavy.wav');
+t = linspace(0,3,172032);
+a = transpose(y);
+plot(t,a);
+cwt(a,Fs);
