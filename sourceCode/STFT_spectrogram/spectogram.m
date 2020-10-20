@@ -20,6 +20,7 @@ plot(f, z);
 
 subplot(3,1,3);
 spectrogram(signal1, 64, 16, 64, Fs, 'yaxis');
+figure;
 
 signal = struct2array(load('114m'));
 signal2 = signal(1:1, 1: Fs*td)/200;
@@ -36,6 +37,7 @@ plot(f, z);
 
 subplot(3,1,3);
 spectrogram(signal2, 64, 16, 64, Fs, 'yaxis');
+figure;
 
 [audio1, Fs] = audioread("breathing-deep-healthy.wav");
 td = size(audio1)/Fs;
@@ -53,6 +55,7 @@ plot(f, z);
 
 subplot(3,1,3);
 spectrogram(audio1, 2048, 512, 2048, Fs, 'yaxis');
+figure;
 
 [audio2, Fs] = audioread("breathing-deep-resp-illness-not-iden.wav");
 td = size(audio2)/Fs;
@@ -70,6 +73,7 @@ plot(f, z);
 
 subplot(3,1,3);
 spectrogram(audio2, 2048, 512, 2048, Fs, 'yaxis');
+
 
 
 
