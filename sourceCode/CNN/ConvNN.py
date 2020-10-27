@@ -22,8 +22,6 @@ leaky_relu_alpha = 0.1
 (input_train, target_train), (input_test, target_test) = mnist.load_data()
 
 # Reshape data based on channels first / channels last strategy.
-# This is dependent on whether you use TF, Theano or CNTK as backend.
-# Source: https://github.com/keras-team/keras/blob/master/examples/mnist_cnn.py
 if K.image_data_format() == 'channels_first':
     input_train = input_train.reshape(input_train.shape[0], 1, img_width, img_height)
     input_test = input_test.reshape(input_test.shape[0], 1, img_width, img_height)
@@ -32,7 +30,7 @@ else:
     input_train = input_train.reshape(input_train.shape[0], img_width, img_height, 1)
     input_test = input_test.reshape(input_test.shape[0], img_width, img_height, 1)
     input_shape = (img_width, img_height, 1)
-print(np.size(input_train,2))
+
 # Parse numbers as floats
 input_train = input_train.astype('float32')
 input_test = input_test.astype('float32')
