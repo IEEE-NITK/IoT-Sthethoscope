@@ -15,8 +15,8 @@ from keras.initializers import Constant
 from keras import backend as K
 from keras.layers import PReLU
 
-inputData = []
-targetData = []
+inputData = np.empty((6898,220500))
+targetData = np.empty(6898)
 root = '../input/respiratory-sound-database/Respiratory_Sound_Database/Respiratory_Sound_Database/audio_and_txt_files/'
 filenames = [s.split('.')[0] for s in os.listdir(path = root) if '.txt' in s]
 i_list = []
@@ -33,7 +33,13 @@ def slice_data(start, end, raw_data,  sample_rate):
     max_ind = len(raw_data)
     start_ind = min(int(start * sample_rate), max_ind)
     end_ind = min(int(end * sample_rate), max_ind)
-    return raw_data[start_ind: end_ind]
+    max_len = 220500
+    if (end_ind-start_ind)>max_len:
+        return raw_data[start_ind:(start_ind+max_len)]
+    elif ((end_ind-start_ind)<max_len):
+        return np.concatenate((raw_data[start_ind:end_ind],np.zeros(max_len+start_ind-end_ind)))
+    elif (end_ind-start_ind)==max_len:
+        return raw_data[start_ind:end_ind]
 
 def getClass(df,index):
     if(df.at[index,'Wheezes']==0 and df.at[index,'Crackles']==0):
@@ -56,13 +62,8 @@ recording_info.head()
 l=0
 for i in rec_annotations_dict:
     j = rec_annotations_dict[i]
-    print(l)
-    l=l+1
     for k in range(j.shape[0]):
         data,sampleRate = sf.read(root+i+'.wav')
-        inputData = np.append(inputData,slice_data(j.at[k,'Start'],j.at[k,'End'], data, sampleRate),axis=0)
-        targetData = np.append(targetData,getClass(j,k))
-
-print(inputData)
-print(targetData)
-print(target)
+        inputData[l] = slice_data(j.at[k,'Start'],j.at[k,'End'], data, sampleRate)
+        targetData[l] = getClass(j,k)
+        l=l+1
