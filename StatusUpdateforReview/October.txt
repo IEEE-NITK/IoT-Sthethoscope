@@ -4,10 +4,9 @@ Progress
 3) Band Pass filter Designed to remove heartbeat sounds in dataset(cutoff frequencies  = 100,5000, order 20, butterworth)
 4) Neural Network Decided is Basic CNN (Activation functions= Parametric ReLU, Output Activation= Softmax, Loss Function = cross entropy, adam initializer, 8 layers)
 5) Random sample conversion to STFT, CWT and MFCCs done with MATLAB.
-
+6) Using file operation to retrieve the annotations in putting them in a dictionary/array
+7) Using the annotations to slice the wav files and retrieve all the breaths with their respective annotation class and putting them in an array similar to the final requirement.
 November Goals
-1) Using file operation to retrieve the annotations in putting them in a dictionary/array
-2) Using the annotations to slice the wav files and retrieve all the breaths with their respective annotation class and putting them in an array similar to the final requirement.
-3) conversion to the resp spectrogram dataset
-4) Training the Network and getting a good accracy.
-6) App development Learning to start after endsems. 
+1) conversion to the resp spectrogram dataset
+2) Training the Network and getting a good accracy.
+3) App development Learning to start after endsems.
